@@ -1,0 +1,43 @@
+name: garden_pro
+description: Garden Pro app
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+  flutter_bloc: ^8.1.1
+  bloc: ^8.1.0
+  equatable: ^2.0.5
+  intl: ^0.17.0 # Add this line
+  intl_utils: ^2.7.0
+  flutter_localizations: # Add this line
+    sdk: flutter
+  firebase_auth: ^4.0.1
+  firebase_core: ^2.0.0
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+  generate: true # Add this line
+
+flutter_intl:
+  enabled: true

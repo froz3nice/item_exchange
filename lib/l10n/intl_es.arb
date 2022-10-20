@@ -1,0 +1,10 @@
+{
+ "title": "Hola mundo",
+  "@title": {
+    "description": "titel",
+    "type": "text"
+  },
+    "home": "Casa",
+    "profile": "Perfil",
+    "Bookings": "Reservas"
+}
