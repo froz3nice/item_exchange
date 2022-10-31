@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 
 import '../AuthService.dart';
 import '../routers/route.dart';
@@ -18,26 +17,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController passwordController = TextEditingController();
   bool _showPassword = false;
 
-
   void register() async {
-      final message = await AuthService().registration(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      if (message!.contains('Success')) {
-
-        Navigator.pushNamed(context, login);
-      }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(message),
-        ),
-      );
+    final message = await AuthService().registration(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+    if (message!.contains('Success')) {
+      Navigator.pushNamed(context, login);
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
+
   @override
   Widget build(BuildContext context) {
-
-
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(title: const Text("Register")),
@@ -98,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         suffixIcon: GestureDetector(
                           onTap: () {
                             setState(() {
-                              _showPassword = !_showPassword;
+                              _showPassword = _showPassword;
                             });
                           },
                           child: Icon(
@@ -118,7 +114,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: (){
+                        onPressed: () {
                           register();
                         },
                         style: ElevatedButton.styleFrom(

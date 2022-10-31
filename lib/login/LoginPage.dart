@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:garden_pro/profile/profile.dart';
 
 import '../generated/l10n.dart';
 import '../routers/route.dart';
+import '../AuthService.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
-  static const String _title = 'Sample App';
+  static const String _title = 'Item exchange';
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        appBar: AppBar(title: const Text(_title)),
-        body: const MyStatefulWidget(),
+    return Scaffold(
+      appBar: AppBar(title: const Text(_title)),
+      body: const MyStatefulWidget(),
     );
   }
 }
@@ -22,13 +25,11 @@ class MyStatefulWidget extends StatefulWidget {
 
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     // final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context);
@@ -55,7 +56,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         Container(
           padding: const EdgeInsets.all(10),
           child: TextField(
-            controller: nameController,
+            controller: emailController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'User Name',
@@ -77,7 +78,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           onPressed: () {
             //forgot password screen
           },
-          child: const Text('Forgot Password',),
+          child: const Text(
+            'Forgot Password',
+          ),
         ),
         Container(
             height: 50,
@@ -85,11 +88,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             child: ElevatedButton(
               child: const Text('Login'),
               onPressed: () {
-                print(nameController.text);
+                login();
+                print(emailController.text);
+
                 print(passwordController.text);
               },
-            )
-        ),
+            )),
         Row(
           children: <Widget>[
             const Text('Does not have account?'),
@@ -99,6 +103,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 style: TextStyle(fontSize: 20),
               ),
               onPressed: () {
+                Navigator.pushNamed(context, register);
+                login();
                 //signup screen
               },
             )
@@ -106,6 +112,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
         ),
       ],
+    );
+  }
+
+  void login() async {
+    final message = await AuthService().login(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+    if (message!.contains('Success')) {
+      Navigator.pushNamed(context, profileRoute);
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
     );
   }
 }
