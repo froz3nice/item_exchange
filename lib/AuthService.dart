@@ -3,13 +3,12 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
-
   Future<String?> registration({
     required String email,
     required String password,
   }) async {
     try {
-    log("registration start");
+      log("registration start");
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
@@ -25,6 +24,15 @@ class AuthService {
       }
     } catch (e) {
       return e.toString();
+    }
+  }
+
+  Future<String?> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      return 'Success';
+    } on FirebaseAuthException catch (e) {
+      return e.message;
     }
   }
 

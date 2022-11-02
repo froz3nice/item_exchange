@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1094185473982",
+    "project_id": "gardenpro-270e4",
+    "storage_bucket": "gardenpro-270e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094185473982:android:012b98345ea7f0a0248bef",
+        "android_client_info": {
+          "package_name": "com.braziusProductions.garden_pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094185473982-jad1g5eor8mg44locejdju0i83ild2sf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQojoxLqqXOr9rbRYC5pxGOPv17w6Quko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094185473982-jad1g5eor8mg44locejdju0i83ild2sf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
