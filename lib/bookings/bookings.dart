@@ -17,11 +17,9 @@ class BookingsPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          BlocBuilder<CounterBloc, CounterState>(
-              builder: (context, state) {
-                return Text(state.counter.toString());
-              }
-          )
+          BlocBuilder<CounterBloc, CounterState>(builder: (context, state) {
+            return Text(state.counter.toString());
+          })
         ],
       ),
     );

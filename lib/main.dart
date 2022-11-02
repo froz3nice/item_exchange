@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,16 +7,16 @@ import 'package:garden_pro/home.dart';
 import 'package:garden_pro/profile/ProfileCubit.dart';
 import 'package:garden_pro/profile/profile.dart';
 import 'package:garden_pro/routers/router_cubit.dart';
-
 import 'app.dart';
+import 'firebase_options.dart';
 import 'generated/l10n.dart';
 import 'routers/route.dart';
 
 void main() async {
-  // These two lines
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Garden Pro',
+        title: 'Item Exchange',
         localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
