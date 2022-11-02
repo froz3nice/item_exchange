@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:garden_pro/bookings/bookings.dart';
@@ -9,9 +7,6 @@ import 'package:garden_pro/profile/profile.dart';
 import 'package:garden_pro/routers/router_cubit.dart';
 import 'package:garden_pro/routers/router_state.dart';
 import 'package:garden_pro/tabs/tab_item.dart';
-import 'package:garden_pro/tabs/tab_navigator.dart';
-
-import 'generated/l10n.dart';
 
 class App extends StatefulWidget {
   @override

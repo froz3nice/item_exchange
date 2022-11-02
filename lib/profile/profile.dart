@@ -1,7 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:garden_pro/login/LoginPage.dart';
+import 'package:garden_pro/Result.dart';
+
 import '../AuthService.dart';
 import '../generated/l10n.dart';
 import '../routers/route.dart';
@@ -49,7 +50,11 @@ class ProfilePage extends StatelessWidget {
 
   void logout() async {
     final message = await AuthService().signOut();
-    if (message!.contains('Success')) {}
-    log(message);
+    if (message is ResultSuccess) {
+      log(message.value);
+    }
+    if (message is ResultError) {
+      log(message.exception);
+    }
   }
 }

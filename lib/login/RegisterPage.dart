@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_pro/Result.dart';
 
 import '../AuthService.dart';
 import '../routers/route.dart';
@@ -18,18 +19,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool _showPassword = false;
 
   void register() async {
-    final message = await AuthService().registration(
+    final result = await AuthService().registration(
       email: emailController.text,
       password: passwordController.text,
     );
-    if (message!.contains('Success')) {
+    if (result is ResultSuccess) {
+      print(result.value);
       Navigator.pushNamed(context, login);
+    } else if (result is ResultError){
+      print(result.exception);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(result.exception),
+        ),
+      );
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
+
   }
 
   @override

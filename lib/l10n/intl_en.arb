@@ -8,5 +8,6 @@
   "profile": "Profile",
   "Bookings": "Bookings",
   "signUp": "Sign Up",
+  "somethingWentWrong": "Something went wrong",
   "logout": "Logout"
 }

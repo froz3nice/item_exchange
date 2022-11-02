@@ -1,9 +1,12 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:garden_pro/Result.dart';
+
+import 'generated/l10n.dart';
 
 class AuthService {
-  Future<String?> registration({
+  Future<Result> registration({
     required String email,
     required String password,
   }) async {
@@ -13,26 +16,29 @@ class AuthService {
         email: email,
         password: password,
       );
-      return 'Success';
+      return Result.success("success");
     } on FirebaseAuthException catch (e) {
+      String? message = "";
       if (e.code == 'weak-password') {
-        return 'The password provided is too weak.';
+        message = 'The password provided is too weak.';
       } else if (e.code == 'email-already-in-use') {
-        return 'The account already exists for that email.';
+        message = 'The account already exists for that email.';
       } else {
-        return e.message;
+        message = e.message;
       }
+      return Result.error(message);
     } catch (e) {
-      return e.toString();
+      return Result.error(S.current.somethingWentWrong);
     }
   }
 
-  Future<String?> signOut() async {
+  Future<Result> signOut() async {
     try {
       await FirebaseAuth.instance.signOut();
-      return 'Success';
+      return Result.success("success");
     } on FirebaseAuthException catch (e) {
-      return e.message;
+      log(e.toString());
+      return Result.error(GenericError(e));
     }
   }
 

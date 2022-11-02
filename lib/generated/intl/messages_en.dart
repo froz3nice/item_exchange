@@ -27,6 +27,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "somethingWentWrong":
+            MessageLookupByLibrary.simpleMessage("Something went wrong"),
         "title": MessageLookupByLibrary.simpleMessage("Hello World")
       };
 }
