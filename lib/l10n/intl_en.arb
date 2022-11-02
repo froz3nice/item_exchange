@@ -6,5 +6,7 @@
   },
   "home": "Home",
   "profile": "Profile",
-  "Bookings": "Bookings"
+  "Bookings": "Bookings",
+  "signUp": "Sign Up",
+  "logout": "Logout"
 }

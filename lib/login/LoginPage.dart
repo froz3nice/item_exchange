@@ -32,7 +32,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    // final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context);
 
     return ListView(
       children: <Widget>[

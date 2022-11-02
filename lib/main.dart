@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:garden_pro/home.dart';
-import 'package:garden_pro/profile/ProfileCubit.dart';
+import 'package:garden_pro/profile/CounterEvent.dart';
 import 'package:garden_pro/profile/profile.dart';
 import 'package:garden_pro/routers/router_cubit.dart';
 import 'app.dart';

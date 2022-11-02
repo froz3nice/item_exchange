@@ -23,7 +23,7 @@ class ProfilePage extends StatelessWidget {
             margin: EdgeInsets.all(25),
             child: ElevatedButton(
               child: Text(
-                'SignUp',
+                S.current.signUp,
                 style: TextStyle(fontSize: 20.0),
               ),
               onPressed: () {
@@ -35,7 +35,7 @@ class ProfilePage extends StatelessWidget {
             margin: EdgeInsets.all(25),
             child: ElevatedButton(
               child: Text(
-                'Logout',
+                S.current.logout,
                 style: TextStyle(fontSize: 20.0),
               ),
               onPressed: () {
