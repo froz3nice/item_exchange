@@ -4,7 +4,7 @@ import 'package:garden_pro/tabs/tab_item.dart';
 import '../routers/route.dart';
 
 class TabNavigatorRoutes {
-  static const String root = homeRoute;
+  static const String root = itemsRoute;
   static const String booking = bookingsRoute;
   static const String profile = profileRoute;
 }

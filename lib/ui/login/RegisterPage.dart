@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:garden_pro/Result.dart';
 
-import '../AuthService.dart';
-import '../routers/route.dart';
+import '../../network/AuthService.dart';
+import '../../routers/route.dart';
 
 class RegisterScreen extends StatefulWidget {
   static String id = "register_screen";
@@ -24,8 +24,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       password: passwordController.text,
     );
     if (result is ResultSuccess) {
-      print(result.value);
-      Navigator.pushNamed(context, login);
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, homeRoute);
+      }
     } else if (result is ResultError){
       print(result.exception);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -123,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           register();
                         },
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.indigo,
+                            backgroundColor: Colors.indigo,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             padding: const EdgeInsets.symmetric(

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:garden_pro/bookings/bookings.dart';
 import 'package:garden_pro/bottom_navigation.dart';
 import 'package:garden_pro/home.dart';
-import 'package:garden_pro/profile/profile.dart';
 import 'package:garden_pro/routers/router_cubit.dart';
 import 'package:garden_pro/routers/router_state.dart';
 import 'package:garden_pro/tabs/tab_item.dart';
+import 'package:garden_pro/ui/profile/profile.dart';
+
+import 'bookings/bookings.dart';
 
 class App extends StatefulWidget {
   @override
@@ -24,16 +25,14 @@ class AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+      return mainPage();
+  }
+
+  Scaffold mainPage() {
     return Scaffold(
       bottomNavigationBar: BlocBuilder<RouterCubit, RouterState>(
           builder: (context, state) => WillPopScope(
-              child: Scaffold(
-                bottomNavigationBar: BottomNavigation(
-                  onSelectTab: _selectTab,
-                  state: state,
-                ),
-                body: _buildBody(state.tabItem),
-              ),
+              child: page(state),
               onWillPop: () async {
                 if (_currentTab != TabItem.home) {
                   _selectTab(TabItem.home);
@@ -43,6 +42,21 @@ class AppState extends State<App> {
                 return true;
               })),
     );
+  }
+
+  Widget page(RouterState state) {
+    // if (!AuthService.isLoggedIn()) {
+    //   return LoginPage();
+    // } else {
+      return Scaffold(
+        bottomNavigationBar: BottomNavigation(
+          onSelectTab: _selectTab,
+          state: state,
+        ),
+        appBar: null,
+        body: _buildBody(state.tabItem),
+      );
+    // }
   }
 
   Widget _buildBody(TabItem tabItem) {

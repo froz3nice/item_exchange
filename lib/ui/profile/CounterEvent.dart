@@ -1,11 +1,7 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:garden_pro/routers/router_state.dart';
 
-import '../tabs/tab_item.dart';
 class CounterEvent extends Equatable {
-
   int counter = 0;
 
   @override
@@ -17,6 +13,7 @@ class CounterEvent extends Equatable {
 
 class CounterState extends Equatable {
   final int counter;
+
   const CounterState({required this.counter});
 
   @override
@@ -26,7 +23,7 @@ class CounterState extends Equatable {
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
   CounterBloc() : super(const CounterState(counter: 0)) {
     on<CounterEvent>((event, emit) {
-        emit(CounterState(counter: state.counter + 1));
+      emit(CounterState(counter: state.counter + 1));
     });
   }
 }

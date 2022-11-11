@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:garden_pro/profile/profile.dart';
 
-import '../generated/l10n.dart';
-import '../routers/route.dart';
-import '../AuthService.dart';
+import '../../Result.dart';
+import '../../network/AuthService.dart';
+import '../../routers/route.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   static const String _title = 'Item exchange';
+
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 
   @override
@@ -30,9 +30,9 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-
     return ListView(
       children: <Widget>[
         Container(
@@ -56,9 +56,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           padding: const EdgeInsets.all(10),
           child: TextField(
             controller: emailController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               border: OutlineInputBorder(),
-              labelText: 'User Name',
+              labelText: "Email"
             ),
           ),
         ),
@@ -89,16 +89,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               onPressed: () {
                 login();
                 print(emailController.text);
-
                 print(passwordController.text);
               },
             )),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text('Does not have account?'),
             TextButton(
               child: const Text(
-                'Sign in',
+                'Sign up',
                 style: TextStyle(fontSize: 20),
               ),
               onPressed: () {
@@ -108,24 +108,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               },
             )
           ],
-          mainAxisAlignment: MainAxisAlignment.center,
         ),
       ],
     );
   }
 
   void login() async {
-    final message = await AuthService().login(
+    final result = await AuthService().login(
       email: emailController.text,
       password: passwordController.text,
     );
-    if (message!.contains('Success')) {
-      Navigator.pushNamed(context, profileRoute);
+    if (!mounted) return;
+    if (result is ResultSuccess) {
+      Navigator.pushReplacementNamed(context, homeRoute);
+    } else if (result is ResultError) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(result.exception),
+        ),
+      );
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
   }
 }

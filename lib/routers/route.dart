@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:garden_pro/home.dart';
-import 'package:garden_pro/login/LoginPage.dart';
-import 'package:garden_pro/login/RegisterPage.dart';
-import 'package:garden_pro/profile/profile.dart';
+import 'package:garden_pro/ui/profile/profile.dart';
 
-import '../bookings/bookings.dart';
+import '../ui/app.dart';
+import '../ui/bookings/bookings.dart';
+import '../ui/login/LoginPage.dart';
+import '../ui/login/RegisterPage.dart';
 
-const String homeRoute = '/';
+const String homeRoute = '/home';
+const String itemsRoute = '/items';
 const String profileRoute = '/profile';
 const String bookingsRoute = '/bookings';
 const String login = '/login';
@@ -16,6 +18,8 @@ class MyRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case homeRoute:
+        return MaterialPageRoute(builder: (_) => SafeArea(child: App()));
+      case itemsRoute:
         return MaterialPageRoute(builder: (_) => HomePage());
       case profileRoute:
         return MaterialPageRoute(builder: (_) => ProfilePage());

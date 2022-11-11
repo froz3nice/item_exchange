@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:garden_pro/Result.dart';
 
-import '../AuthService.dart';
-import '../generated/l10n.dart';
-import '../routers/route.dart';
+import '../../generated/l10n.dart';
+import '../../network/AuthService.dart';
+import '../../routers/route.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
@@ -40,18 +40,18 @@ class ProfilePage extends StatelessWidget {
                 style: TextStyle(fontSize: 20.0),
               ),
               onPressed: () {
-                logout();
-                Navigator.pushNamed(context, register);
+                logout(context);
               },
             ),
           ),
         ])));
   }
 
-  void logout() async {
+  void logout(BuildContext context) async {
     final message = await AuthService().signOut();
     if (message is ResultSuccess) {
       log(message.value);
+      Navigator.pushReplacementNamed(context, login);
     }
     if (message is ResultError) {
       log(message.exception);

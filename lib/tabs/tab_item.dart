@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import '../generated/l10n.dart';
 
 enum TabItem { home, bookings, profile }

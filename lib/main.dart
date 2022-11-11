@@ -1,16 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:garden_pro/home.dart';
-import 'package:garden_pro/profile/CounterEvent.dart';
-import 'package:garden_pro/profile/profile.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:garden_pro/routers/router_cubit.dart';
-import 'app.dart';
+import 'package:garden_pro/ui/profile/CounterEvent.dart';
+
 import 'firebase_options.dart';
-import 'generated/l10n.dart';
+import '/generated/l10n.dart';
+import 'network/AuthService.dart';
 import 'routers/route.dart';
+import 'ui/app.dart';
+import 'ui/login/LoginPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +23,12 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Widget startPage;
+    if (AuthService.isLoggedIn()) {
+      startPage = App();
+    } else {
+      startPage = LoginPage();
+    }
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -45,7 +51,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: SafeArea(child: App()),
+        home: SafeArea(child: startPage),
       ),
     );
   }

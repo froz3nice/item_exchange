@@ -3,9 +3,14 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:garden_pro/Result.dart';
 
-import 'generated/l10n.dart';
+import '../generated/l10n.dart';
+
 
 class AuthService {
+  static bool isLoggedIn() {
+    return FirebaseAuth.instance.currentUser != null;
+  }
+
   Future<Result> registration({
     required String email,
     required String password,
@@ -16,6 +21,7 @@ class AuthService {
         email: email,
         password: password,
       );
+      await login(email: email, password: password);
       return Result.success("success");
     } on FirebaseAuthException catch (e) {
       String? message = "";
@@ -42,7 +48,7 @@ class AuthService {
     }
   }
 
-  Future<String?> login({
+  Future<Result> login({
     required String email,
     required String password,
   }) async {
@@ -51,17 +57,19 @@ class AuthService {
         email: email,
         password: password,
       );
-      return 'Success';
+      return Result.success("");
     } on FirebaseAuthException catch (e) {
+      String? message = "";
       if (e.code == 'user-not-found') {
-        return 'No user found for that email.';
+        message = 'No user found for that email.';
       } else if (e.code == 'wrong-password') {
-        return 'Wrong password provided for that user.';
+        message = 'Wrong password provided for that user.';
       } else {
-        return e.message;
+        message = e.message;
       }
+      return Result.error(message);
     } catch (e) {
-      return e.toString();
+      return Result.error(S.current.somethingWentWrong);
     }
   }
 }
